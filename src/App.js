@@ -146,41 +146,50 @@ class App extends Component {
 
   render() {
     const { sessionLength, breakLength, displayTime, isRunning, mode, numberOfSessions } = this.state;
-
+    let color = {
+      sessionColor: '#2ecc71',
+      breakColor: '#f1c40f'
+    }
     return (
       <div className="App">
-        <h4 className="pomodoro-clock">Pomodoro Clock</h4>
         <div className="time-controls">
+          <h4>Pomodoro Clock</h4>
           <form>
-            Session length
+            <div>
+              <label>Session</label>
               <input
                 type="text"
                 name="sessionLength"
                 value={sessionLength}
-                onChange={this.handleChange} /><br/>
-            Break length
+                onChange={this.handleChange} />
+            </div>
+            <div>
+              <label>Break  </label>
               <input
               type="text"
               name="breakLength"
               value={breakLength}
-              onChange={this.handleChange} /><br />
-            Number of sessions
+              onChange={this.handleChange} />
+            </div>
+            <div>
+              <label>Rounds </label>
               <input
               type="text"
               name="numberOfSessions"
               value={numberOfSessions}
-              onChange={this.handleChange}/> 
+              onChange={this.handleChange} />
+            </div>
           </form>
         </div>
 
         <div className="display-time">
           <h2 className="time-left">{mode}</h2>
-          <p>Time Left</p>
-          <h1>{ displayTime }</h1>
+          {(mode === 'Session') ? <h1 style={{ color: '#2ecc71' }}>{displayTime}</h1>
+            : <h1 style={{ color: '#f1c40f' }}>{displayTime}</h1>}
           {(isRunning === false) ? <button type="button" onClick={() => this.startCountDown()}>Start</button>
             : <button type="button" onClick={() => this.onPause()}>Pause</button>}
           <button type="button" onClick={() => this.resetClock()}>Reset</button>
-        </div>
+        </div> 
       </div>
     );
   }
