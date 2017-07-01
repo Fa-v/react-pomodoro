@@ -25,14 +25,16 @@ class App extends Component {
     const { sessionLength } = this.state;
     const target = event.target;
     const name = target.name;
-    let value = parseInt(target.value, 10) > 60 ? '60' : target.value;
+    let value = parseInt(target.value, 10) > 60 ? '60'
+      : parseInt(target.value, 10) <= 0 ? '1'
+      : target.value;
     
     if (isNaN(value) && value !== '') {
       return;
     } else {
       this.setState({
         [name]: value,
-        sessionNumber: name === 'numberOfSessions' ? value - 1 : 1,
+        sessionNumber: name === 'numberOfSessions' ? value - 1 : 0,
         displayTime: name === 'sessionLength'
           ? (value === '' ? '0:00' : value + ':00')
           : sessionLength + ':00'
